@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NAMLYS @ ICCSA 2026 — Workshop on Numerical Aspects in Machine Learning for Dynamical Systems</title>
+  <meta name="description" content="NAMLYS (Workshop on Numerical Aspects in Machine Learning for Dynamical Systems) at ICCSA 2026 — University of Minho, Braga, Portugal — June 30–July 3, 2026." />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --card2:#0f1730;
+      --text:#eaf0ff;
+      --muted:#b7c1e3;
+      --line:rgba(255,255,255,.12);
+      --accent:#66c7ff;
+      --accent2:#ffb24a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1080px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(1200px 600px at 20% 0%, rgba(102,199,255,.18), transparent 60%),
+                        radial-gradient(900px 500px at 90% 20%, rgba(255,178,74,.14), transparent 55%),
+                        var(--bg);
+              color:var(--text); font-family:var(--font); line-height:1.55}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:10px 0 22px; border-bottom:1px solid var(--line);
+    }
+    .brand{display:flex; flex-direction:column; gap:2px}
+    .brand strong{letter-spacing:.4px; font-size:15px}
+    .brand span{color:var(--muted); font-size:13px}
+    .navlinks{display:flex; flex-wrap:wrap; gap:10px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.04);
+      font-size:13px;
+    }
+    .hero{padding:22px 0 10px}
+    .banner{
+      width:100%; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+    }
+    .banner img{display:block; width:100%; height:auto}
+    .grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; padding:18px 0 10px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .card h2{margin:0 0 10px; font-size:18px}
+    .card h3{margin:16px 0 8px; font-size:15px; color:var(--text)}
+    .muted{color:var(--muted)}
+    .kpi{
+      display:flex; flex-direction:column; gap:10px;
+      background:linear-gradient(180deg, rgba(102,199,255,.12), rgba(255,255,255,.02));
+    }
+    .krow{display:flex; justify-content:space-between; gap:14px; padding:10px 12px; border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.18)}
+    .krow b{font-weight:700}
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:6px 0}
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:14px
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:600; font-size:13px;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(102,199,255,.25), rgba(255,178,74,.18));
+      border-color: rgba(102,199,255,.35);
+    }
+    .btn:hover{filter:brightness(1.05); text-decoration:none}
+    .section{margin-top:16px}
+    .twoCol{
+      display:grid; grid-template-columns: 1fr 1fr; gap:18px;
+    }
+    @media (max-width: 900px){ .twoCol{grid-template-columns:1fr} }
+    .table{
+      width:100%; border-collapse:separate; border-spacing:0;
+      overflow:hidden; border-radius:14px; border:1px solid var(--line);
+    }
+    .table th, .table td{
+      padding:10px 12px; border-bottom:1px solid var(--line);
+      vertical-align:top; text-align:left; font-size:14px;
+    }
+    .table th{background:rgba(255,255,255,.06); font-size:13px; color:var(--muted); letter-spacing:.3px; text-transform:uppercase}
+    .table tr:last-child td{border-bottom:none}
+    .tag{
+      display:inline-block; padding:3px 8px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.04);
+      font-size:12px; color:var(--muted);
+    }
+    .people{display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px}
+    .person{
+      border:1px solid var(--line); border-radius:14px; padding:12px;
+      background:rgba(0,0,0,.18);
+    }
+    .person b{display:block; margin-bottom:2px}
+    footer{margin:26px 0 10px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+    .small{font-size:13px}
+    .note{
+      border-left:3px solid rgba(255,178,74,.7);
+      padding:10px 12px;
+      background:rgba(255,178,74,.08);
+      border-radius:12px;
+      margin-top:12px;
+    }
+    .howto{
+      border:1px solid rgba(102,199,255,.28);
+      background:linear-gradient(180deg, rgba(102,199,255,.10), rgba(0,0,0,.10));
+      border-radius:14px;
+      padding:12px;
+      margin-top:14px;
+    }
+    .howto ol{
+      margin:8px 0 0 18px;
+    }
+    .howto li{margin:7px 0}
+    .kbd{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-size:12px;
+      white-space:nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="nav">
+      <div class="brand">
+        <strong>NAMLYS @ ICCSA 2026</strong>
+        <span>Workshop on Numerical Aspects in Machine Learning for Dynamical Systems</span>
+      </div>
+      <nav class="navlinks" aria-label="Quick links">
+        <a class="pill" href="https://ess.iccsa.org" target="_blank" rel="noreferrer">Electronic Submission System (ESS)</a>
+        <a class="pill" href="https://iccsa.org/instructions-for-authors" target="_blank" rel="noreferrer">Author’s page</a>
+        <a class="pill" href="https://iccsa.org/important-dates" target="_blank" rel="noreferrer">Important dates</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <!-- Put the image file in the same folder and name it "namlys-banner.png" (or change src). -->
+      <div class="banner">
+        <img src="namlys-banner.png" alt="NAMLYS banner — Braga, Portugal — ICCSA 2026" />
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Overview</h2>
+          <p class="muted">
+            <b>NAMLYS</b> aims to foster discussion on emerging numerical and computational challenges in applying
+            machine learning to dynamical systems, with particular emphasis on <b>high-performance computing (HPC)</b>,
+            <b>numerical stability</b>, and <b>distributed training</b>.
+          </p>
+          <p class="muted">
+            We welcome contributions exploring the interplay among numerical analysis, machine learning, and HPC in
+            time-dependent systems and evolutionary problems.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="https://ess.iccsa.org" target="_blank" rel="noreferrer">Submit via ESS</a>
+            <a class="btn" href="https://iccsa.org/instructions-for-authors" target="_blank" rel="noreferrer">Submission / Registration instructions</a>
+            <a class="btn" href="#dates">Important dates (on this page)</a>
+
+            <!-- Contact organizers with CC -->
+            <a class="btn"
+               href="mailto:pasquale.deluca@uniparthenope.it?cc=livia.marcellino@uniparthenope.it,valeria.mele@unina.it&subject=NAMLYS%20%40%20ICCSA%202026%20%E2%80%94%20Inquiry&body=Dear%20NAMLYS%20Organizers%2C%0D%0A%0D%0AI%20would%20like%20to%20ask%20about%20...%0D%0A%0D%0ABest%20regards%2C%0D%0A"
+               aria-label="Contact organizers via email (with CC)">
+              Contact organizers
+            </a>
+          </div>
+
+          <div class="note small">
+            <b>Submission note:</b> When submitting your contribution to the <b>NAMLYS Workshop</b>, please select the
+            correct entry in the list box shown in the <i>Abstract, Paper and Camera Ready</i> submission forms.
+          </div>
+
+          <!-- How to submit box -->
+          <div class="howto" id="how-to-submit">
+            <h3 style="margin:0 0 6px">How to submit</h3>
+            <ol class="muted">
+              <li>
+                Read the ICCSA author guidelines on the
+                <a href="https://iccsa.org/instructions-for-authors" target="_blank" rel="noreferrer">Author’s page</a>
+                (format, templates, policies).
+              </li>
+              <li>
+                Prepare your manuscript following the ICCSA instructions (Springer LNCS workflow applies to the proceedings process).
+              </li>
+              <li>
+                Go to the <a href="https://ess.iccsa.org" target="_blank" rel="noreferrer">Electronic Submission System (ESS)</a>
+                and log in / create an account.
+              </li>
+              <li>
+                In the submission form, select the correct workshop entry:
+                <span class="kbd">NAMLYS</span> in the list box shown in the <span class="kbd">Abstract</span>,
+                <span class="kbd">Paper</span>, and <span class="kbd">Camera Ready</span> steps.
+              </li>
+              <li>
+                Upload your paper, verify metadata (title, authors, keywords), and complete the submission.
+              </li>
+              <li>
+                Keep track of deadlines (see <a href="#dates">Important dates</a>) and be ready for the camera-ready and registration steps if accepted.
+              </li>
+              <li>
+                If you have questions, use the <a href="#people">Contact organizers</a> option above.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <aside class="card kpi" aria-label="Key information">
+          <h2>Key information</h2>
+          <div class="krow"><span class="muted">Conference dates</span><b>June 30 – July 3, 2026</b></div>
+          <div class="krow"><span class="muted">Venue</span><b>University of Minho, Braga, Portugal</b></div>
+          <div class="krow"><span class="muted">Workshop</span><b>NAMLYS</b></div>
+          <div class="krow"><span class="muted">Proceedings</span><b>Springer LNCS</b></div>
+          <div class="krow"><span class="muted">Submission system</span><b>ICCSA ESS</b></div>
+
+          <div class="section">
+            <span class="tag">Full paper deadline</span>
+            <p style="margin:8px 0 0" class="muted">
+              <b>March 31, 2026</b> (full paper submission).<br/>
+              <span class="small muted">See also ICCSA <a href="https://iccsa.org/important-dates" target="_blank" rel="noreferrer">important dates</a> for any updates.</span>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="card section" id="scope">
+      <h2>Workshop scope</h2>
+      <p class="muted">
+        NAMLYS aims to foster discussion on emerging numerical and computational challenges in applying machine learning
+        to dynamical systems, with particular emphasis on high-performance computing, numerical stability, and
+        distributed training.
+      </p>
+
+      <h3>Topics of interest <span class="muted">(including, but not limited to)</span></h3>
+      <ul class="muted">
+        <li>HPC-aware parallel and distributed algorithms for deep learning</li>
+        <li>Conditioning and numerical stability in training processes</li>
+        <li>Numerical linear algebra for large-scale learning</li>
+        <li>Finite-precision arithmetic effects</li>
+        <li>Error analysis in backpropagation and automatic differentiation</li>
+        <li>Neural solvers for ODEs and PDEs with adaptive timestepping</li>
+        <li>Accelerator-based implementations (GPUs/TPUs and emerging hardware)</li>
+        <li>Numerical methods in neural PDE solvers</li>
+        <li>Federated learning and decentralized training for physics-based models</li>
+      </ul>
+    </section>
+
+    <section class="twoCol section" id="submission">
+      <div class="card">
+        <h2>Submission</h2>
+        <p class="muted">
+          Papers must be submitted through the ICCSA electronic submission system:
+          <a href="https://ess.iccsa.org" target="_blank" rel="noreferrer">https://ess.iccsa.org</a>.
+        </p>
+        <p class="muted">
+          Submission, registration and presentation instructions:
+          <a href="https://iccsa.org/instructions-for-authors" target="_blank" rel="noreferrer">Author’s page</a>.
+        </p>
+        <div class="note small">
+          <b>Important:</b> When submitting your contribution to the NAMLYS Workshop, please select the correct entry in the
+          list box shown in the submission forms (Abstract / Paper / Camera Ready).
+        </div>
+		<div class="note small">
+          <b>Important:</b> For <u>virtual presenters</u>, a test room to become familiar with the Jitsi platform and make some tests is also available.
+        </div>
+      </div>
+
+      <div class="card" id="dates">
+        <h2>Important dates (ICCSA 2026)</h2>
+        <table class="table" aria-label="Important dates">
+          <thead>
+            <tr><th>Milestone</th><th>Date</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Deadline for paper submission</b></td>
+              <td>
+                <b>March 31, 2026</b><br/>
+                <span class="muted small">Earlier date listed: March 20, 2026</span>
+              </td>
+            </tr>
+            <tr>
+              <td><b>Notification of acceptance</b></td>
+              <td><b>April 20, 2026</b></td>
+            </tr>
+            <tr>
+              <td><b>Camera-ready deadline (final version)</b></td>
+              <td><b>May 8, 2026</b> <span class="tag">hard deadline</span></td>
+            </tr>
+            <tr>
+              <td><b>Registration &amp; payment deadline</b></td>
+              <td><b>May 8, 2026</b> <span class="tag">hard deadline</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="muted small" style="margin-top:10px">
+          Official page: <a href="https://iccsa.org/important-dates" target="_blank" rel="noreferrer">ICCSA Important Dates</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="card section" id="iccsa">
+      <h2>ICCSA 2026 — key information</h2>
+      <ul class="muted">
+        <li><b>Conference dates:</b> June 30 – July 3, 2026</li>
+        <li><b>Venue:</b> University of Minho, Braga, Portugal</li>
+        <li><b>Proceedings:</b> Accepted papers will appear in the conference proceedings and be published by Springer-Verlag in the Lecture Notes in Computer Science (LNCS) series (subject to the conference review and publication process).</li>
+        <li><b>Submission system:</b> Papers must be submitted through the ICCSA electronic submission system (ESS).</li>
+        <li><b>Instructions:</b> Submission, registration and presentation instructions are available at
+          <a href="https://iccsa.org/instructions-for-authors" target="_blank" rel="noreferrer">https://iccsa.org/instructions-for-authors</a>.
+        </li>
+      </ul>
+      <p class="muted small">
+        For conference details, please refer to the official ICCSA 2026 website.
+      </p>
+    </section>
+
+    <section class="twoCol section" id="people">
+      <div class="card">
+        <h2>Program Committee</h2>
+        <div class="people">
+          <div class="person">
+            <b>Dario Caramiello</b>
+            <span class="muted">University of Naples Parthenope, Italy</span>
+          </div>
+          <div class="person">
+            <b>Giuseppe Fiorillo</b>
+            <span class="muted">Parthenope University of Naples, Italy</span>
+          </div>
+          <div class="person">
+            <b>Marco Lettiero</b>
+            <span class="muted">University of Naples Parthenope, Italy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Organizers</h2>
+        <p class="muted small" style="margin:0 0 10px">
+          Quick contact:
+          <a class="btn" style="margin-left:8px; vertical-align:middle"
+             href="mailto:pasquale.deluca@uniparthenope.it?cc=livia.marcellino@uniparthenope.it,valeria.mele@unina.it&subject=NAMLYS%20%40%20ICCSA%202026%20%E2%80%94%20Inquiry&body=Dear%20NAMLYS%20Organizers%2C%0D%0A%0D%0AI%20would%20like%20to%20ask%20about%20...%0D%0A%0D%0ABest%20regards%2C%0D%0A">
+            Contact organizers
+          </a>
+        </p>
+
+        <div class="people">
+          <div class="person">
+            <b>Pasquale De Luca</b>
+            <span class="muted">University of Naples “Parthenope”, Naples, Italy</span><br/>
+            <a class="small" href="mailto:pasquale.deluca@uniparthenope.it">pasquale.deluca@uniparthenope.it</a>
+          </div>
+          <div class="person">
+            <b>Livia Marcellino</b>
+            <span class="muted">University of Naples “Parthenope”, Naples, Italy</span><br/>
+            <a class="small" href="mailto:livia.marcellino@uniparthenope.it">livia.marcellino@uniparthenope.it</a>
+          </div>
+          <div class="person">
+            <b>Valeria Mele</b>
+            <span class="muted">University of Naples Federico II, Naples, Italy</span><br/>
+            <a class="small" href="mailto:valeria.mele@unina.it">valeria.mele@unina.it</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="small">
+        © NAMLYS @ ICCSA 2026 — University of Minho, Braga, Portugal — June 30–July 3, 2026.
+        <br/>
+        Quick links:
+        <a href="https://ess.iccsa.org" target="_blank" rel="noreferrer">ESS</a> ·
+        <a href="https://iccsa.org/instructions-for-authors" target="_blank" rel="noreferrer">Author’s page</a> ·
+        <a href="https://iccsa.org/important-dates" target="_blank" rel="noreferrer">Important dates</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
